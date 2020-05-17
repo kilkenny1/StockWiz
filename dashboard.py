@@ -189,11 +189,12 @@ def refresh_dashboard(wb,ws,ticker,benchmark):
     #Price
     price_df=get_daily_historical_price(ticker,'200')
 
-
     print('price data GET success')
     ws.range('B14').value=pct_diff(price_df,5)
     ws.range('C14').value=pct_diff(price_df,30)
     ws.range('D14').value=get_ytd_pct_change(ticker)
+    
+    print('price diff for %s updated' %ticker)
 
     #Technical indicator
     ws.range('A20').value=get_peak_alert(ticker)
@@ -206,7 +207,6 @@ def refresh_dashboard(wb,ws,ticker,benchmark):
 
 ##Conf
 
-excel_json_parser(get_all_etf_prices(),'/Users/Kelvin/Documents/StockAnalyzer.xlsm','ETF')
 refresh_dashboard('/Users/Kelvin/Documents/StockAnalyzer.xlsm','INTC','INTC','QQQ')
 refresh_dashboard('/Users/Kelvin/Documents/StockAnalyzer.xlsm','NVDA','NVDA','QQQ')
 refresh_dashboard('/Users/Kelvin/Documents/StockAnalyzer.xlsm','AAPL','AAPL','QQQ')
